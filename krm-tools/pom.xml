@@ -25,6 +25,7 @@
         <module>krm-tools-dozer</module>
         <module>krm-tools-mp-generator</module>
         <module>krm-tools-database-demo</module>
+        <module>krm-tools-redis</module>
     </modules>
 
     <properties>
