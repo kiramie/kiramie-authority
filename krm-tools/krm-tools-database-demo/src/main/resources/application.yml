@@ -1,0 +1,59 @@
+server:
+  port: 8079
+
+spring:
+  application:
+    name: krm-tools-database-demo
+    #出现错误时, 直接抛出异常
+  mvc:
+    throw-exception-if-no-handler-found: true
+  servlet:
+    multipart:
+      max-file-size: 20MB
+  datasource:
+    dynamic:
+      druid:
+        #监控统计拦截的filters
+        filters: stat
+        #配置初始化大小/最小/最大
+        initial-size: 5
+        min-idle: 5
+        max-active: 20
+        #获取连接等待超时时间
+        max-wait: 60000
+        #间隔多久进行一次检测，检测需要关闭的空闲连接
+        time-between-eviction-runs-millis: 60000
+        #一个连接在池中最小生存的时间
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 'x'
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+        pool-prepared-statements: false
+        max-pool-prepared-statement-per-connection-size: 20
+      primary: mysql1
+      strict: false
+      datasource:
+        mysql1:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/gsb_summary?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=Asia/Shanghai&useSSL=false
+          username: root
+          password: 12345678
+        mysql2:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/recurtion?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=Asia/Shanghai&useSSL=false
+          username: root
+          password: 12345678
+        pg1:
+          driver-class-name: org.postgresql.Driver
+          url: jdbc:postgresql://localhost:5432/self-test-db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+          username: binyang
+          password: 12345678
+mybatis-plus:
+  mapper-locations: classpath:mapping/**/*Mapper.xml
+  type-aliases-package: com.kiramie.databaseDemo.entity
+#  typeEnumsPackage: com.kiramie.common.enums
+  configuration:
+    map-underscore-to-camel-case: true
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

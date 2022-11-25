@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kiramie.databseDemo.mapper.mysql1.PtOrganizationMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kiramie.databseDemo.entity.mysql1.PtOrganization">
+        <id column="organization_id" property="organizationId" />
+        <result column="organization_name" property="organizationName" />
+        <result column="organization_short_name" property="organizationShortName" />
+        <result column="organization_type" property="organizationType" />
+        <result column="legal_persons_name" property="legalPersonsName" />
+        <result column="legal_persons_id_card" property="legalPersonsIdCard" />
+        <result column="social_credit_code" property="socialCreditCode" />
+        <result column="positive_id_card_url" property="positiveIdCardUrl" />
+        <result column="opposite_id_card_url" property="oppositeIdCardUrl" />
+        <result column="license_url" property="licenseUrl" />
+        <result column="organization_logo_url" property="organizationLogoUrl" />
+        <result column="administrator_id" property="administratorId" />
+        <result column="administrator_name" property="administratorName" />
+        <result column="administrator_mobile" property="administratorMobile" />
+        <result column="member_count" property="memberCount" />
+        <result column="account_id" property="accountId" />
+        <result column="account_detail" property="accountDetail" />
+        <result column="state" property="state" />
+        <result column="remark" property="remark" />
+        <result column="memo" property="memo" />
+        <result column="version" property="version" />
+        <result column="is_enabled" property="isEnabled" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="created_by" property="createdBy" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="created_by_name" property="createdByName" />
+        <result column="updated_by_name" property="updatedByName" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+</mapper>

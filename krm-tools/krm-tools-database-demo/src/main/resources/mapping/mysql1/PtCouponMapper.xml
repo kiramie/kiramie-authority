@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kiramie.databseDemo.mapper.mysql1.PtCouponMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kiramie.databseDemo.entity.mysql1.PtCoupon">
+        <id column="id" property="id" />
+        <result column="template_id" property="templateId" />
+        <result column="coupon_name" property="couponName" />
+        <result column="coupon_desc" property="couponDesc" />
+        <result column="use_desc" property="useDesc" />
+        <result column="coupon_type" property="couponType" />
+        <result column="discount_amount" property="discountAmount" />
+        <result column="discount_ratio" property="discountRatio" />
+        <result column="demand_amount" property="demandAmount" />
+        <result column="client_scope" property="clientScope" />
+        <result column="product_scope" property="productScope" />
+        <result column="task_id" property="taskId" />
+        <result column="org_id" property="orgId" />
+        <result column="user_id" property="userId" />
+        <result column="valid_time_start" property="validTimeStart" />
+        <result column="valid_time_end" property="validTimeEnd" />
+        <result column="use_state" property="useState" />
+        <result column="use_time" property="useTime" />
+        <result column="ref_order" property="refOrder" />
+        <result column="use_client" property="useClient" />
+        <result column="use_product" property="useProduct" />
+        <result column="remark" property="remark" />
+        <result column="memo" property="memo" />
+        <result column="use_user_id" property="useUserId" />
+        <result column="use_username" property="useUsername" />
+        <result column="created_by" property="createdBy" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="created_by_name" property="createdByName" />
+        <result column="updated_by_name" property="updatedByName" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+</mapper>

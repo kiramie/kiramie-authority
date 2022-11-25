@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.2.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.kiramie</groupId>
+    <artifactId>krm-parent</artifactId>
+    <version>${krm.parent.version}</version>
+    <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+    <description>SpringBoot2.0项目依赖管理/环境管理</description>
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <!--properties-->
+    <properties>
+        <krm.parent.version>1.0-SNAPSHOT</krm.parent.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
+        <spring.cloud.version>Hoxton.SR1</spring.cloud.version>
+        <spring-cloud-alibaba-dependencies.version>2.1.1.RELEASE</spring-cloud-alibaba-dependencies.version>
+        <spring.version>5.2.2.RELEASE</spring.version>
+        <spring-boot-admin.version>2.2.0</spring-boot-admin.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <!--<druid.version>1.1.21</druid.version>-->
+        <druid.version>1.2.4</druid.version>
+        <mysql.version>8.0.22</mysql.version>
+        <fastjson.version>1.2.72</fastjson.version>
+        <knife4j.version>2.0.1</knife4j.version>
+        <springfox.swagger2.version>2.9.2</springfox.swagger2.version>
+        <swagger.version>1.5.21</swagger.version>
+        <dozer.version>6.5.0</dozer.version>
+        <lombok.version>1.18.10</lombok.version>
+        <knife4j.version>2.0.9</knife4j.version>
+        <easy-captcha.version>1.6.2</easy-captcha.version>
+        <guava.version>20.0</guava.version>
+        <tobato-fastdfs-client.version>1.26.6</tobato-fastdfs-client.version>
+        <qiniu-java-sdk>7.2.18</qiniu-java-sdk>
+        <j2cache.version>2.8.0-release</j2cache.version>
+        <hibernate.validator.version>6.1.0.Final</hibernate.validator.version>
+        <commons-exec.version>1.3</commons-exec.version>
+        <commons-email.version>1.5</commons-email.version>
+        <commons.collections4.version>4.4</commons.collections4.version>
+        <commons-lang.version>2.6</commons-lang.version>
+        <commons-io.version>2.6</commons-io.version>
+        <maven.test.skip>true</maven.test.skip>
+        <asm.version>5.0.4</asm.version>
+        <groovy-all.version>2.5.5</groovy-all.version>
+        <jjwt.version>0.7.0</jjwt.version>
+        <qcloudsms.version>1.0.6</qcloudsms.version>
+        <bce-java-sdk.version>0.10.21</bce-java-sdk.version>
+        <hutool.version>5.1.0</hutool.version>
+        <antisamy.version>1.5.7</antisamy.version>
+        <caffeine.version>2.8.0</caffeine.version>
+        <ip2region.version>1.7.2</ip2region.version>
+        <bitwalker.version>1.21</bitwalker.version>
+    </properties>
+
+    <!-- 环境 -->
+    <!--<profiles>
+        &lt;!&ndash; 开发 &ndash;&gt;
+        <profile>
+            <id>dev</id>
+            <activation>
+                &lt;!&ndash;默认激活配置&ndash;&gt;
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                &lt;!&ndash;当前环境&ndash;&gt;
+                <pom.profile.name>dev</pom.profile.name>
+                &lt;!&ndash;Nacos配置中心地址&ndash;&gt;
+                <pom.nacos.ip>127.0.0.1</pom.nacos.ip>
+                <pom.nacos.port>8848</pom.nacos.port>
+                &lt;!&ndash;Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空&ndash;&gt;
+                <pom.nacos.namespace>a90795c9-78ba-4f58-a77e-5d370531a590</pom.nacos.namespace>
+            </properties>
+        </profile>
+        &lt;!&ndash; docker 环境 &ndash;&gt;
+        <profile>
+            <id>docker</id>
+            <properties>
+                <pom.profile.name>docker</pom.profile.name>
+                &lt;!&ndash;Nacos配置中心地址&ndash;&gt;
+                <pom.nacos.ip>192.168.1.34</pom.nacos.ip>
+                <pom.nacos.port>8848</pom.nacos.port>
+                &lt;!&ndash;Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空&ndash;&gt;
+                <pom.nacos.namespace>3bef359b-1ef7-4816-9c31-adb694b90bbe</pom.nacos.namespace>
+            </properties>
+        </profile>
+        &lt;!&ndash; 生产 &ndash;&gt;
+        <profile>
+            <id>prod</id>
+            <properties>
+                <pom.profile.name>prod</pom.profile.name>
+                &lt;!&ndash;Nacos配置中心地址&ndash;&gt;
+                <pom.nacos.ip>127.0.0.1</pom.nacos.ip>
+                <pom.nacos.port>8848</pom.nacos.port>
+                &lt;!&ndash;Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空&ndash;&gt;
+                <pom.nacos.namespace>8ca7657a-ad29-4f47-a0f7-af3cc9b5d7d5</pom.nacos.namespace>
+            </properties>
+        </profile>
+    </profiles>-->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <profiles.active>test</profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profiles.active>prod</profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>stage</id>
+            <properties>
+                <profiles.active>stage</profiles.active>
+            </properties>
+        </profile>
+    </profiles>
+
+    <!--仓库-->
+    <repositories>
+        <repository>
+            <id>aliyun</id>
+            <name>aliyun</name>
+            <url>https://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+        </repository>
+        <repository>
+            <id>oss</id>
+            <name>oss</name>
+            <url>https://oss.sonatype.org/content/groups/public</url>
+        </repository>
+    </repositories>
+
+    <!--dependencyManagement-->
+    <dependencyManagement>
+
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.lionsoul</groupId>
+                <artifactId>ip2region</artifactId>
+                <version>${ip2region.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/eu.bitwalker/UserAgentUtils -->
+            <dependency>
+                <groupId>eu.bitwalker</groupId>
+                <artifactId>UserAgentUtils</artifactId>
+                <version>${bitwalker.version}</version>
+            </dependency>
+
+            <!-- 持久层相关 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>3.5.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.4.0</version>
+            </dependency>
+            <!-- 模板引擎 -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>2.1</version>
+            </dependency>
+            <!--逆向工程需要模板引擎-->
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>2.3.28</version>
+            </dependency>
+            <!--<dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatisplus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatisplus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-typehandlers-jsr310</artifactId>
+                <version>${mybatis.typehandlers.version}</version>
+            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>com.alibaba</groupId>-->
+            <!--                <artifactId>druid</artifactId>-->
+            <!--                <version>${druid.version}</version>-->
+            <!--            </dependency>-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.oschina.j2cache</groupId>
+                <artifactId>j2cache-core</artifactId>
+                <version>${j2cache.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-simple</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- 对象转换 -->
+            <dependency>
+                <groupId>com.github.dozermapper</groupId>
+                <artifactId>dozer-spring-boot-starter</artifactId>
+                <version>${dozer.version}</version>
+            </dependency>
+
+            <!-- knife4j接口文档 -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <!-- swagger2 -->
+            <!--<dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox.swagger2.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-models</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-models</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-bean-validators</artifactId>
+                <version>${springfox.swagger2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-core</artifactId>
+                <version>${springfox.swagger2.version}</version>
+            </dependency>
+            &lt;!&ndash;            <dependency>&ndash;&gt;
+            &lt;!&ndash;                <groupId>com.github.xiaoymin</groupId>&ndash;&gt;
+            &lt;!&ndash;                <artifactId>swagger-bootstrap-ui</artifactId>&ndash;&gt;
+            &lt;!&ndash;                <version>${sbu.version}</version>&ndash;&gt;
+            &lt;!&ndash;            </dependency>&ndash;&gt;
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-ui</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>-->
+
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <!-- jackson 序列化 -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-parameter-names</artifactId>
+                <version>${jackson.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <!--<dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-server-ui</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>-->
+            <!--<dependency>-->
+            <!--<groupId>de.codecentric</groupId>-->
+            <!--<artifactId>spring-boot-admin-starter-client</artifactId>-->
+            <!--<version>${spring-boot-admin.version}</version>-->
+            <!--</dependency>-->
+
+            <dependency>
+                <groupId>org.owasp.antisamy</groupId>
+                <artifactId>antisamy</artifactId>
+                <version>${antisamy.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons-lang.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>${easy-captcha.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <!--dependencies-->
+    <dependencies>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+
+        <!--Lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
+
+    </dependencies>
+
+    <!--build-->
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <pluginManagement>
+            <plugins>
+                <!--                <plugin>-->
+                <!--                    <groupId>org.springframework.boot</groupId>-->
+                <!--                    <artifactId>spring-boot-maven-plugin</artifactId>-->
+                <!--                    <executions>-->
+                <!--                        <execution>-->
+                <!--                            <goals>-->
+                <!--                                <goal>repackage</goal>-->
+                <!--                                <goal>build-info</goal>-->
+                <!--                            </goals>-->
+                <!--                        </execution>-->
+                <!--                    </executions>-->
+                <!--                </plugin>-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <!-- resources资源插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <!-- 后缀为pem、pfx的证书文件 -->
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>pem</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>pfx</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>p12</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>key</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
+            <!-- java文档插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

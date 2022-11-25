@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kiramie.databseDemo.mapper.pg1.device.DeviceInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kiramie.databseDemo.entity.pg1.device.DeviceInfo">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="mac" property="mac" />
+        <result column="wifi_version" property="wifiVersion" />
+        <result column="mcu_version" property="mcuVersion" />
+        <result column="country_id" property="countryId" />
+        <result column="country" property="country" />
+        <result column="province_id" property="provinceId" />
+        <result column="province" property="province" />
+        <result column="city_id" property="cityId" />
+        <result column="city" property="city" />
+        <result column="area_id" property="areaId" />
+        <result column="area" property="area" />
+        <result column="address" property="address" />
+        <result column="remark" property="remark" />
+        <result column="merchant_id" property="merchantId" />
+        <result column="merchant_name" property="merchantName" />
+        <result column="product_id" property="productId" />
+        <result column="product_name" property="productName" />
+        <result column="product_key" property="productKey" />
+        <result column="online_status" property="onlineStatus" />
+        <result column="status" property="status" />
+        <result column="last_online_time" property="lastOnlineTime" />
+        <result column="create_time" property="createTime" />
+        <result column="create_by" property="createBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_by" property="updateBy" />
+        <result column="deleted" property="deleted" />
+        <result column="longitude" property="longitude" />
+        <result column="latitude" property="latitude" />
+    </resultMap>
+
+</mapper>

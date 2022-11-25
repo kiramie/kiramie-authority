@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kiramie.databseDemo.mapper.mysql1.PtCouponTemplateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kiramie.databseDemo.entity.mysql1.PtCouponTemplate">
+        <id column="id" property="id" />
+        <result column="coupon_name" property="couponName" />
+        <result column="coupon_desc" property="couponDesc" />
+        <result column="use_desc" property="useDesc" />
+        <result column="coupon_type" property="couponType" />
+        <result column="discount_amount" property="discountAmount" />
+        <result column="discount_ratio" property="discountRatio" />
+        <result column="demand_amount" property="demandAmount" />
+        <result column="client_scope" property="clientScope" />
+        <result column="product_scope" property="productScope" />
+        <result column="validity_mode" property="validityMode" />
+        <result column="valid_time_start" property="validTimeStart" />
+        <result column="valid_time_end" property="validTimeEnd" />
+        <result column="deadline" property="deadline" />
+        <result column="grant_state" property="grantState" />
+        <result column="remark" property="remark" />
+        <result column="memo" property="memo" />
+        <result column="is_enabled" property="isEnabled" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="created_by" property="createdBy" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="created_by_name" property="createdByName" />
+        <result column="updated_by_name" property="updatedByName" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+</mapper>

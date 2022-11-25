@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--<parent>
+        <groupId>com.kiramie</groupId>
+        <artifactId>kiramie-authority</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>-->
+    <parent>
+        <groupId>com.kiramie</groupId>
+        <artifactId>krm-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../krm-parent</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>krm-tools</artifactId>
+    <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+    <description>工具模块</description>
+    <modules>
+        <module>krm-tools-validator</module>
+        <module>krm-tools-swagger</module>
+        <module>krm-tools-dozer</module>
+        <module>krm-tools-mp-generator</module>
+        <module>krm-tools-database-demo</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.kiramie</groupId>
+            <artifactId>krm-parent</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+</project>

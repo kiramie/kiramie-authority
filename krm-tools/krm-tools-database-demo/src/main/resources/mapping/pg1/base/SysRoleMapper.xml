@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kiramie.databseDemo.mapper.pg1.base.SysRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kiramie.databseDemo.entity.pg1.base.SysRole">
+        <id column="id" property="id" />
+        <result column="parent_id" property="parentId" />
+        <result column="name" property="name" />
+        <result column="type" property="type" />
+        <result column="description" property="description" />
+        <result column="menu_ids" property="menuIds" />
+        <result column="default_data" property="defaultData" />
+        <result column="merchant_id" property="merchantId" />
+        <result column="merchant_name" property="merchantName" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="create_by" property="createBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_by" property="updateBy" />
+        <result column="deleted" property="deleted" />
+    </resultMap>
+
+</mapper>

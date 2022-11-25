@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: krm-auth-server
+  profiles:
+    active: @profiles.active@
+  #出现错误时, 直接抛出异常
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+dozer:
+  mappingFiles:
+    - classpath:dozer/global.dozer.xml
+    - classpath:dozer/biz.dozer.xml
