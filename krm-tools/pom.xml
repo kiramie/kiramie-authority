@@ -26,6 +26,7 @@
         <module>krm-tools-mp-generator</module>
         <module>krm-tools-database-demo</module>
         <module>krm-tools-redis</module>
+        <module>krm-tools-feign-demo</module>
     </modules>
 
     <properties>

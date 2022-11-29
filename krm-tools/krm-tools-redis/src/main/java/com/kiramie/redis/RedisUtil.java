@@ -2,10 +2,12 @@ package com.kiramie.redis;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -583,6 +585,90 @@ public class RedisUtil {
             log.error("redis操作发生异常,msg:{}", e.getMessage(), e);
             return 0;
         }
+    }
+
+    /**
+     * 写入排行榜
+     */
+    public boolean zadd(final String key, double score, Object name) {
+        boolean result = false;
+        try {
+            ZSetOperations<String, Object> operations = redisTemplate.opsForZSet();
+            result = operations.add(key, name, score);
+        } catch (Exception e) {
+            log.error("redis操作发生异常,msg:{}", e.getMessage(), e);
+        }
+        return result;
+    }
+
+    /**
+     * 查看单个分数
+     */
+    public double zscore(final String key, Object name) {
+        double result = 0;
+        try {
+            ZSetOperations<String, Object> operations = redisTemplate.opsForZSet();
+            result = operations.score(key, name);
+        } catch (Exception e) {
+            log.error("redis操作发生异常,msg:{}", e.getMessage(), e);
+        }
+        return result;
+    }
+
+    /**
+     * 按分数由高到低查看排行榜
+     */
+    public Set zrevrange(final String key, int start, int end) {
+        Set result = null;
+        try {
+            ZSetOperations<String, Object> operations = redisTemplate.opsForZSet();
+            result = operations.reverseRange(key, start, end);
+        } catch (Exception e) {
+            log.error("redis操作发生异常,msg:{}", e.getMessage(), e);
+        }
+        return result;
+    }
+
+    /**
+     * 查询单个分数从高到低的排名
+     */
+    public Long zreverseRank(final String key, Object name) {
+        Long result = null;
+        try {
+            ZSetOperations<String, Object> operations = redisTemplate.opsForZSet();
+            result = operations.reverseRank(key, name);
+        } catch (Exception e) {
+            log.error("redis操作发生异常,msg:{}", e.getMessage(), e);
+        }
+        return result;
+    }
+
+    /**
+     * 增减单个分数
+     */
+    public Double zincrby(final String key, Object name, double incrScore) {
+        Double result = null;
+        try {
+            ZSetOperations<String, Object> operations = redisTemplate.opsForZSet();
+            result = operations.incrementScore(key, name, incrScore);
+        } catch (Exception e) {
+            log.error("redis操作发生异常,msg:{}", e.getMessage(), e);
+        }
+        return result;
+    }
+
+    /**
+     * 移除单个元素
+     */
+    public Long zremove(final String key, Object name) {
+        Long result = null;
+        try {
+            ZSetOperations<String, Object> operations = redisTemplate.opsForZSet();
+            result = operations.remove(key, name);
+        } catch (Exception e) {
+            log.error("redis操作发生异常,msg:{}", e.getMessage(), e);
+        }
+        return result;
     }
 }
 

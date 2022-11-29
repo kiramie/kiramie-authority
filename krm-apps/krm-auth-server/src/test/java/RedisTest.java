@@ -5,6 +5,8 @@ import com.kiramie.authority.dto.demo.Demo1Dto;
 import com.kiramie.redis.RedisUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.BoundListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
@@ -18,6 +20,9 @@ public class RedisTest {
 
     @Resource
     private RedisUtil redisUtil;
+
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Test
     public void t1() {
@@ -47,4 +52,30 @@ public class RedisTest {
             put("k2", "hello world");
         }});
     }
+
+    @Test
+    public void t4(){
+        Integer i = 100;
+        System.out.println(i >> 2);//4
+    }
+
+    @Test
+    public void t5(){
+        long l = System.currentTimeMillis();
+        System.out.println(l);
+        redisUtil.zadd("granwin:function:ZSetQueue:0", l, "granwin:function:timerQueue:upgrade-device");
+    }
+
+    @Test
+    public void t6(){
+        BoundListOperations<String, Object> list1 = redisTemplate.boundListOps("list1");
+        //list1.leftPushAll("aa", "bb", "cc", "ee", "dd");
+        list1.leftPushAll("bb", "ee");
+    }
+
+    //@Test
+    //public void t7(){
+    //    BoundListOperations<String, Object> list1 = redisTemplate.boundListOps("list1");
+    //    list1.rightPop()
+    //}
 }

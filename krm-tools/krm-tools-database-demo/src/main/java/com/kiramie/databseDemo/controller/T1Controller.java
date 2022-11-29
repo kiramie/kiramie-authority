@@ -1,11 +1,16 @@
 package com.kiramie.databseDemo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kiramie.databseDemo.entity.mysql1.PtCoupon;
+import com.kiramie.databseDemo.mapper.mysql1.PtCouponMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @author yangbin
@@ -15,6 +20,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/t1")
 public class T1Controller {
+
+    @Resource
+    private PtCouponMapper ptCouponMapper;
 
     @GetMapping("/m1")
     public JSONObject m1() {
@@ -42,4 +50,16 @@ public class T1Controller {
         log.info(s);
         return ptCoupon;
     }
+
+    @GetMapping("/selectPtCoupon/{page}/{size}")
+    public JSONObject selectPtCoupon(@PathVariable Integer page, @PathVariable Integer size) {
+        Page<PtCoupon> ptCouponPage = ptCouponMapper.selectPage(new Page<PtCoupon>().setCurrent(1L).setSize(100L),
+                Wrappers.<PtCoupon>lambdaQuery().isNotNull(PtCoupon::getCouponType).orderByDesc(PtCoupon::getCreatedAt));
+        return new JSONObject() {{
+            put("code", 0);
+            put("msg", "success");
+            put("result", ptCouponPage);
+        }};
+    }
+
 }
