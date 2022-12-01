@@ -1,4 +1,5 @@
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -6,15 +7,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kiramie.databseDemo.DatabaseDemoApplication;
 import com.kiramie.databseDemo._enum.CouponTypeEnum;
 import com.kiramie.databseDemo.entity.mysql1.PtCoupon;
+import com.kiramie.databseDemo.entity.mysql2.Chain;
 import com.kiramie.databseDemo.entity.pg1.device.DeviceInfo;
 import com.kiramie.databseDemo.mapper.mysql1.PtCouponMapper;
+import com.kiramie.databseDemo.mapper.mysql2.ChainMapper;
 import com.kiramie.databseDemo.mapper.pg1.device.DeviceInfoMapper;
+import com.kiramie.databseDemo.util.CronUtil;
+import com.kiramie.databseDemo.util.TreeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author yangbin
@@ -29,6 +36,9 @@ public class Test1 {
 
     @Resource
     private DeviceInfoMapper deviceInfoMapper;
+
+    @Resource
+    private ChainMapper chainMapper;
 
     @Test
     public void t1() {
@@ -111,5 +121,28 @@ public class Test1 {
         log.info(ptCoupon.getCouponType().getDesc());
         log.info("t9:\n{}", objectMapper.writeValueAsString(ptCoupon));
     }
+
+    @Test
+    public void t10() {
+        //LocalDateTime localDateTime = LocalDateTime.now();
+        long l = System.currentTimeMillis();
+        log.info("l 【{}】", new Date(l));
+        log.info("---");
+        for (int i = 0; i < 10; i++) {
+            long nextTime = CronUtil.getNextTime("0 /1 * * * ?", "Asia/Shanghai", l);
+            //localDateTime = Instant.ofEpochMilli(nextTime).atZone(ZoneId.of("Asia/Shanghai")).toLocalDateTime();
+            l = nextTime;
+            log.info("nextTime【{}】", new Date(nextTime));
+        }
+    }
+
+    @Test
+    public void t11() {
+        List<Chain> chains = chainMapper.selectList(null);
+        //log.info("\n"+JSONObject.toJSONString(chains, SerializerFeature.PrettyFormat));
+        List<Chain> build = TreeUtil.build(chains);
+        log.info("\n" + JSONObject.toJSONString(build, SerializerFeature.PrettyFormat));
+    }
+
 
 }

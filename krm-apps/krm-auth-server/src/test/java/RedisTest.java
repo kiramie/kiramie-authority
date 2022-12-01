@@ -150,4 +150,10 @@ public class RedisTest {
         future5.join();
         log.info("<<<l: {}", l);
     }
+
+    @Test
+    public void t11(){
+        String s = "金额";
+        System.out.println(s.length());
+    }
 }

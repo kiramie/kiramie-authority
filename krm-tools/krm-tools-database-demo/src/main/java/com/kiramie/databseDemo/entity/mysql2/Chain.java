@@ -4,14 +4,16 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.kiramie.databseDemo.util.ITreeNode;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author kiramie
@@ -20,7 +22,7 @@ import java.io.Serializable;
 @Data
 @TableName("chain")
 @ApiModel(value = "Chain对象", description = "")
-public class Chain implements Serializable {
+public class Chain implements Serializable, ITreeNode<Chain, Long> {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,8 +32,9 @@ public class Chain implements Serializable {
     @TableField("parent_id")
     private Long parentId;
 
-    @TableField("`name`")
+    @TableField("name")
     private String name;
 
-
+    @TableField(value = "children", exist = false)
+    private List<Chain> children;
 }
