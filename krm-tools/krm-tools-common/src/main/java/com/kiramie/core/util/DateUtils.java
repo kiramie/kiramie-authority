@@ -22,11 +22,11 @@ public class DateUtils {
     public final static String DEFAULT_YEAR_FORMAT = "yyyy";
     public final static String DEFAULT_MONTH_FORMAT = "yyyy-MM";
     public final static String DEFAULT_MONTH_FORMAT_SLASH = "yyyy/MM";
-    public final static String DEFAULT_MONTH_FORMAT_EN = "yyyy年MM月";
+    public final static String DEFAULT_MONTH_FORMAT_ZH = "yyyy年MM月";
     public final static String DEFAULT_WEEK_FORMAT = "yyyy-ww";
-    public final static String DEFAULT_WEEK_FORMAT_EN = "yyyy年ww周";
+    public final static String DEFAULT_WEEK_FORMAT_ZH = "yyyy年ww周";
     public final static String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
-    public final static String DEFAULT_DATE_FORMAT_EN = "yyyy年MM月dd日";
+    public final static String DEFAULT_DATE_FORMAT_ZH = "yyyy年MM月dd日";
     public final static String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public final static String DEFAULT_TIME_FORMAT = "HH:mm:ss";
     public final static String DAY = "DAY";
@@ -97,8 +97,8 @@ public class DateUtils {
         return format(date, DEFAULT_DATE_FORMAT);
     }
 
-    public static String formatAsDateEn(LocalDateTime date) {
-        return format(date, DEFAULT_DATE_FORMAT_EN);
+    public static String formatAsDateZh(LocalDateTime date) {
+        return format(date, DEFAULT_DATE_FORMAT_ZH);
     }
 
 
@@ -106,8 +106,8 @@ public class DateUtils {
         return format(date, DEFAULT_MONTH_FORMAT);
     }
 
-    public static String formatAsYearMonthEn(LocalDateTime date) {
-        return format(date, DEFAULT_MONTH_FORMAT_EN);
+    public static String formatAsYearMonthZh(LocalDateTime date) {
+        return format(date, DEFAULT_MONTH_FORMAT_ZH);
     }
 
     /**
@@ -120,8 +120,8 @@ public class DateUtils {
         return format(date, DEFAULT_WEEK_FORMAT);
     }
 
-    public static String formatAsYearWeekEn(LocalDateTime date) {
-        return format(date, DEFAULT_WEEK_FORMAT_EN);
+    public static String formatAsYearWeekZh(LocalDateTime date) {
+        return format(date, DEFAULT_WEEK_FORMAT_ZH);
     }
 
     /**
@@ -447,8 +447,8 @@ public class DateUtils {
         return getBetweenDay(startDate, endDate, DEFAULT_DATE_FORMAT);
     }
 
-    public static List<String> getBetweenDayEn(LocalDate startDate, LocalDate endDate) {
-        return getBetweenDay(startDate, endDate, DEFAULT_DATE_FORMAT_EN);
+    public static List<String> getBetweenDayZh(LocalDate startDate, LocalDate endDate) {
+        return getBetweenDay(startDate, endDate, DEFAULT_DATE_FORMAT_ZH);
     }
 
     public static List<String> getBetweenDay(LocalDate startDate, LocalDate endDate, String pattern) {
@@ -570,14 +570,14 @@ public class DateUtils {
      * @param dateList
      * @return
      */
-    public static String calculationEn(LocalDateTime startTime, LocalDateTime endTime, List<String> dateList) {
+    public static String calculationZh(LocalDateTime startTime, LocalDateTime endTime, List<String> dateList) {
         if (startTime == null) {
             startTime = LocalDateTime.now();
         }
         if (endTime == null) {
             endTime = LocalDateTime.now().plusDays(30);
         }
-        return calculationEn(startTime.toLocalDate(), endTime.toLocalDate(), dateList);
+        return calculationZh(startTime.toLocalDate(), endTime.toLocalDate(), dateList);
     }
 
     public static String calculation(LocalDate startDate, LocalDate endDate, List<String> dateList) {
@@ -608,7 +608,7 @@ public class DateUtils {
         return dateType;
     }
 
-    public static String calculationEn(LocalDate startDate, LocalDate endDate, List<String> dateList) {
+    public static String calculationZh(LocalDate startDate, LocalDate endDate, List<String> dateList) {
         if (startDate == null) {
             startDate = LocalDate.now();
         }
@@ -623,13 +623,13 @@ public class DateUtils {
         String dateType = MONTH;
         if (day >= 0 && day <= MAX_MONTH_DAY) {
             dateType = DAY;
-            dateList.addAll(DateUtils.getBetweenDay(startDate, endDate, DEFAULT_DATE_FORMAT_EN));
+            dateList.addAll(DateUtils.getBetweenDay(startDate, endDate, DEFAULT_DATE_FORMAT_ZH));
         } else if (day > MAX_MONTH_DAY && day <= MAX_3_MONTH_DAY) {
             dateType = WEEK;
-            dateList.addAll(DateUtils.getBetweenWeek(startDate, endDate, DEFAULT_WEEK_FORMAT_EN));
+            dateList.addAll(DateUtils.getBetweenWeek(startDate, endDate, DEFAULT_WEEK_FORMAT_ZH));
         } else if (day > MAX_3_MONTH_DAY && day <= MAX_YEAR_DAY) {
             dateType = MONTH;
-            dateList.addAll(DateUtils.getBetweenMonth(startDate, endDate, DEFAULT_MONTH_FORMAT_EN));
+            dateList.addAll(DateUtils.getBetweenMonth(startDate, endDate, DEFAULT_MONTH_FORMAT_ZH));
         } else {
             throw new BizException("日期参数只能介于0-365天之间");
         }
