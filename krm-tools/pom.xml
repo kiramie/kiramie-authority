@@ -28,6 +28,7 @@
         <module>krm-tools-redis</module>
         <module>krm-tools-feign-demo</module>
         <module>krm-tools-jwt</module>
+        <module>krm-tools-common</module>
     </modules>
 
     <properties>
