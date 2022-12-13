@@ -51,6 +51,8 @@ spring:
           username: binyang
           password: 12345678
 mybatis-plus:
+  global-config:
+    banner: false
   mapper-locations: classpath:mapping/**/*Mapper.xml
   type-aliases-package: com.kiramie.databaseDemo.entity
 #  typeEnumsPackage: com.kiramie.common.enums

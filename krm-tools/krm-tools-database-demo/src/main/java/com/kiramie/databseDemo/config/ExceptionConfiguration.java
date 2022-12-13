@@ -1,18 +1,14 @@
 package com.kiramie.databseDemo.config;
 
 import com.kiramie.common.handler.DefaultGlobalExceptionHandler;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * @author yangbin
  * @since 2022/12/2
  **/
-@Configuration
-@ControllerAdvice(annotations = {RestController.class, Controller.class})
-@ResponseBody
+//@Configuration
+//@ControllerAdvice(annotations = {RestController.class, Controller.class})
+@RestControllerAdvice
 public class ExceptionConfiguration extends DefaultGlobalExceptionHandler {
 }

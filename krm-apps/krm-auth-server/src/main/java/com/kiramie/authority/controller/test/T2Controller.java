@@ -7,11 +7,10 @@ import com.kiramie.dozer.DozerUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author yangbin
@@ -19,7 +18,8 @@ import javax.annotation.Resource;
  **/
 @Api(tags = "t2")
 @Slf4j
-@RestController("/t2")
+@RestController
+@RequestMapping("t2")
 public class T2Controller {
 
     @Resource
@@ -39,4 +39,12 @@ public class T2Controller {
         log.info("vueRouter: {}", s);
         return s;
     }
+
+    @GetMapping("/m3")
+    public String m3(@RequestParam("ids[]") List<Long> ids){
+        String s = JSONObject.toJSONString(ids);
+        log.info("m3 {}", s);
+        return s;
+    }
+
 }
