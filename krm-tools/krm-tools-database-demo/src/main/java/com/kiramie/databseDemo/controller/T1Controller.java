@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author yangbin
@@ -24,7 +25,7 @@ public class T1Controller {
     @Resource
     private PtCouponMapper ptCouponMapper;
 
-    @GetMapping("/m1")
+    @RequestMapping("/m1")
     public JSONObject m1() {
         return new JSONObject() {{
             put("code", 0);
@@ -59,6 +60,19 @@ public class T1Controller {
             put("code", 0);
             put("msg", "success");
             put("result", ptCouponPage);
+        }};
+    }
+
+    @RequestMapping("/m4")
+    public JSONObject m4(HttpServletRequest request) {
+        log.info(JSONObject.toJSONString(request.getParameterMap()));
+        return new JSONObject() {{
+            put("code", 0);
+            put("data", new JSONObject() {{
+                put("k1", "v1");
+                put("k2", "v2");
+            }});
+            put("msg", "ok");
         }};
     }
 

@@ -12,7 +12,7 @@
 
     <groupId>com.kiramie</groupId>
     <artifactId>krm-parent</artifactId>
-    <version>${krm.parent.version}</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>SpringBoot2.0项目依赖管理/环境管理</description>
@@ -43,7 +43,6 @@
         <druid.version>1.2.4</druid.version>
         <mysql.version>8.0.22</mysql.version>
         <fastjson.version>1.2.72</fastjson.version>
-        <knife4j.version>2.0.1</knife4j.version>
         <springfox.swagger2.version>2.9.2</springfox.swagger2.version>
         <swagger.version>1.5.21</swagger.version>
         <dozer.version>6.5.0</dozer.version>
@@ -150,7 +149,7 @@
     </profiles>
 
     <!--仓库-->
-    <repositories>
+    <!--<repositories>
         <repository>
             <id>aliyun</id>
             <name>aliyun</name>
@@ -166,7 +165,7 @@
             <name>oss</name>
             <url>https://oss.sonatype.org/content/groups/public</url>
         </repository>
-    </repositories>
+    </repositories>-->
 
     <!--dependencyManagement-->
     <dependencyManagement>
