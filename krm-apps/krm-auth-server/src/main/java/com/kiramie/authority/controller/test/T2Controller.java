@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 /**
  * @author yangbin
@@ -45,6 +50,83 @@ public class T2Controller {
         String s = JSONObject.toJSONString(ids);
         log.info("m3 {}", s);
         return s;
+    }
+
+    @GetMapping("/m4")
+    public String m4(){
+        log.info("t1 start...");
+        CountDownLatch cdl = new CountDownLatch(3);
+        CompletableFuture<Boolean> powerStateFuture = CompletableFuture.supplyAsync(() -> {
+            try {
+                int second = new Random().nextInt(5);
+                TimeUnit.SECONDS.sleep(second);
+                log.info("powerStateFuture...{}", second);
+                cdl.countDown();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }).applyToEitherAsync(CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(6000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            log.info("powerStateFuture timeout...{}", 6000);
+            return false;
+        }), Function.identity());
+
+        CompletableFuture<Integer> brightnessFuture = CompletableFuture.supplyAsync(() -> {
+            try {
+                int second = new Random().nextInt(5);
+                TimeUnit.SECONDS.sleep(second);
+                log.info("brightnessFuture...{}", second);
+                cdl.countDown();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return 80;
+        }).applyToEitherAsync(CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(6000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            log.info("brightnessFuture timeout...{}", 6000);
+            return 1;
+        }), Function.identity());
+
+        CompletableFuture<Integer> colorTemperatureFuture = CompletableFuture.supplyAsync(() -> {
+            try {
+                int second = new Random().nextInt(5);
+                TimeUnit.SECONDS.sleep(second);
+                log.info("colorTemperatureFuture...{}", second);
+                cdl.countDown();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return 3600;
+        }).applyToEitherAsync(CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(6000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            log.info("colorTemperatureFuture timeout...{}", 6000);
+            return 1000;
+        }), Function.identity());
+        try {
+            cdl.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        JSONObject jsonObject = new JSONObject() {{
+            put("powerState", powerStateFuture.join());
+            put("brightness", brightnessFuture.join());
+            put("colorTemperature", colorTemperatureFuture.join());
+        }};
+        log.info("t1 end...{}", jsonObject.toJSONString());
+        return jsonObject.toJSONString();
     }
 
 }
